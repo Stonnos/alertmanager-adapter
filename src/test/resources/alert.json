@@ -1,0 +1,134 @@
+{
+  "receiver": "eca-admin",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "eca-mail:8080",
+        "job": "eca-mail",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "eca-mail:8080 has been down for more than 2 minutes.",
+        "summary": "Service eca-mail:8080 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:05:29.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "0f86e0e444440bf5"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "eca-oauth:8080",
+        "job": "eca-oauth",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "eca-oauth:8080 has been down for more than 2 minutes.",
+        "summary": "Service eca-oauth:8080 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:05:29.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "942754e73fae04cd"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "eca-server-instance-1:8080",
+        "job": "eca-server",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "eca-server-instance-1:8080 has been down for more than 2 minutes.",
+        "summary": "Service eca-server-instance-1:8080 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:05:29.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "d506173934286197"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "eca-server-instance-2:8080",
+        "job": "eca-server",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "eca-server-instance-2:8080 has been down for more than 2 minutes.",
+        "summary": "Service eca-server-instance-2:8080 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:05:29.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "86fc0570ead19f1c"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "evaluation-results-service:9443",
+        "job": "evaluation-results-service",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "evaluation-results-service:9443 has been down for more than 2 minutes.",
+        "summary": "Service evaluation-results-service:9443 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:05:29.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "65d66c7f6dae7bd5"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "postgres-exporter:9187",
+        "job": "postgres-exporter",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "postgres-exporter:9187 has been down for more than 2 minutes.",
+        "summary": "Service postgres-exporter:9187 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:04:59.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "97e5614ccd9dca90"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "ServiceDown",
+        "instance": "rabbitmq:15692",
+        "job": "rabbitmq",
+        "severity": "critical"
+      },
+      "annotations": {
+        "description": "rabbitmq:15692 has been down for more than 2 minutes.",
+        "summary": "Service rabbitmq:15692 is unavailable."
+      },
+      "startsAt": "2021-02-03T11:05:29.345644896+07:00",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0\\u0026g0.tab=1",
+      "fingerprint": "7a45d46a33e9bd1c"
+    }
+  ],
+  "groupLabels": {},
+  "commonLabels": {
+    "alertname": "ServiceDown",
+    "severity": "critical"
+  },
+  "commonAnnotations": {},
+  "externalURL": "http://eca-service:9093",
+  "version": "4",
+  "groupKey": "{}:{}"
+}
