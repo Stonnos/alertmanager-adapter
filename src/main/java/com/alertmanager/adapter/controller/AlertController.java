@@ -1,6 +1,8 @@
 package com.alertmanager.adapter.controller;
 
 import com.alertmanager.adapter.dto.AlertRequest;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Roman Batygin
  */
 @Slf4j
+@Tag(name = "API for sending alerts from alert manager to specified channels")
 @RestController
 @RequestMapping("/alerts")
 @RequiredArgsConstructor
@@ -24,6 +27,7 @@ public class AlertController {
      *
      * @param alertRequest - alert request
      */
+    @Operation(summary = "Send alert to telegram")
     @PostMapping(value = "/telegram")
     public void sendAlertToTelegram(@RequestBody AlertRequest alertRequest) {
         if (log.isDebugEnabled()) {
