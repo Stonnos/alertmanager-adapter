@@ -3,6 +3,11 @@ package com.alertmanager.adapter.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/**
+ * Alert model.
+ *
+ * @author Roman Batygin
+ */
 @Data
 public class Alert {
 
