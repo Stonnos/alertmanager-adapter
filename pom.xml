@@ -29,6 +29,7 @@
         <docker-maven-plugin.version>1.4.13</docker-maven-plugin.version>
         <docker.image.name>${project.artifactId}</docker.image.name>
         <guava.version>30.0-jre</guava.version>
+        <telegrambots.version>5.0.1.1</telegrambots.version>
         <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
         <jacoco.minCoverage>0</jacoco.minCoverage>
     </properties>
@@ -113,6 +114,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>${telegrambots.version}</version>
         </dependency>
 
         <!--test dependencies-->
