@@ -1,4 +1,4 @@
-package com.alertmanager.adapter.service;
+package com.alertmanager.adapter.service.telegram;
 
 import com.alertmanager.adapter.config.TelegramConfig;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import org.telegram.telegrambots.meta.updateshandlers.SentCallback;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TelegramService {
+public class TelegramSender {
 
     private final TelegramConfig telegramConfig;
     private final TelegramLongPollingBot telegramLongPollingBot;
@@ -31,6 +31,9 @@ public class TelegramService {
      * @param message - message string
      */
     public void sendMessage(String message) throws TelegramApiException {
+        if (log.isDebugEnabled()) {
+            log.debug("Starting to send message [{}] to telegram", message);
+        }
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(telegramConfig.getChatId())
                 .text(message)
@@ -38,7 +41,9 @@ public class TelegramService {
         telegramLongPollingBot.executeAsync(sendMessage, new SentCallback<>() {
             @Override
             public void onResult(BotApiMethod<Message> method, Message response) {
-                log.debug("Message [{}] has been sent to telegram with response: {}", message, response);
+               if (log.isDebugEnabled()) {
+                   log.debug("Message [{}] has been sent to telegram with response: {}", message, response);
+               }
             }
 
             @Override
