@@ -1,6 +1,7 @@
 package com.alertmanager.adapter.controller;
 
 import com.alertmanager.adapter.dto.AlertRequest;
+import com.alertmanager.adapter.service.AlertService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -22,16 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AlertController {
 
+    private final AlertService alertService;
+
     /**
      * Received request from alert manager for sending to telegram.
      *
      * @param alertRequest - alert request
+     * @throws Exception in case of error
      */
     @Operation(summary = "Send alert to telegram")
     @PostMapping(value = "/telegram")
-    public void sendAlertToTelegram(@RequestBody AlertRequest alertRequest) {
+    public void sendAlertToTelegram(@RequestBody AlertRequest alertRequest) throws Exception {
         if (log.isDebugEnabled()) {
             log.debug("Received alert request for sending to telegram: {}", alertRequest);
         }
+        alertService.sendAlert(alertRequest);
     }
 }

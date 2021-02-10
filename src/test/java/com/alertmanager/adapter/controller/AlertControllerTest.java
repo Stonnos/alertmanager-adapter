@@ -1,9 +1,11 @@
 package com.alertmanager.adapter.controller;
 
 import com.alertmanager.adapter.dto.AlertRequest;
+import com.alertmanager.adapter.service.AlertService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,6 +25,9 @@ class AlertControllerTest {
 
     private static final String BASE_URL = "/alerts";
     private static final String TELEGRAM_REQUEST_URL = BASE_URL + "/telegram";
+
+    @MockBean
+    private AlertService alertService;
 
     @Inject
     private MockMvc mockMvc;
