@@ -38,6 +38,7 @@ public class TelegramSender {
                 .chatId(telegramConfig.getChatId())
                 .text(message)
                 .build();
+        sendMessage.enableHtml(true);
         telegramLongPollingBot.executeAsync(sendMessage, new SentCallback<>() {
             @Override
             public void onResult(BotApiMethod<Message> method, Message response) {
