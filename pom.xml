@@ -32,6 +32,12 @@
         <telegrambots.version>5.0.1.1</telegrambots.version>
         <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
         <jacoco.minCoverage>0</jacoco.minCoverage>
+        <sonar.coverage.exclusions>
+            **/config/*,
+            **/exception/*,
+            **/dto/*,
+            **/AlertManagerAdapterApplication.java
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
