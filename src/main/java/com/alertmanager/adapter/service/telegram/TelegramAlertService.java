@@ -37,8 +37,9 @@ public class TelegramAlertService implements AlertService {
         if (log.isDebugEnabled()) {
             log.debug("Starting to send alert {} to telegram", alertRequest);
         }
-        List<List<Alert>> alertPartitions = Lists.partition(alertRequest.getAlerts(), telegramConfig.getBatchSize());
-        log.debug("Got [{}] alerts chunks of size [{}]", alertPartitions.size(), telegramConfig.getBatchSize());
+        int alertBatchSize = telegramConfig.getAlertBatchSize();
+        List<List<Alert>> alertPartitions = Lists.partition(alertRequest.getAlerts(), alertBatchSize);
+        log.debug("Got [{}] alerts chunks of size [{}]", alertPartitions.size(), alertBatchSize);
         for (var alerts : alertPartitions) {
             Map<String, Object> templateData = Collections.singletonMap(ALERTS_VARIABLE, alerts);
             String message = templateProcessorService.process(TELEGRAM_ALERT_TEMPLATE, templateData);

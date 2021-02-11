@@ -19,6 +19,8 @@
 * telegram.token - токен доступа к Telegram API
 * telegram.botUserName - имя бота
 * telegram.chatId - ID чата
+* telegram.numThreads - число потоков для параллельной отправки сообщений
+* telegram.alertBatchSize - число alert-ов в одном сообщений для Telegram
 
 == Инструкция по запуску
 
@@ -41,6 +43,7 @@ services:
     container_name: alertmanager-adapter
     environment:
       SERVER_PORT: "8080"
+      JAVA_OPTS: "-Xmx256m"
       TELEGRAM_BASEURL: "https://api.telegram.org/bot"
       TELEGRAM_TOKEN: "<token>"
       TELEGRAM_BOTUSERNAME: "<your-bot>"
@@ -55,6 +58,8 @@ services:
 |Переменная окружения|Описание
 |SERVER_PORT
 |Порт для запуска приложения
+|JAVA_OPTS
+|Настройки для виртуальной машины java
 |TELEGRAM_BASEURL
 |Базовый url Telegram API
 |TELEGRAM_TOKEN
@@ -65,7 +70,7 @@ services:
 |ID чата
 |===
 
-== Настройка web hook в alert manager
+== Настройка web hook в alertmanager.yml
 
 [source,yml]
 ----

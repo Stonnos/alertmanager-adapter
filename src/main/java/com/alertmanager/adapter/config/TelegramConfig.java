@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties("telegram")
 public class TelegramConfig {
 
-    private static final int MAX_BATCH_SIZE = 5;
+    private static final int MAX_ALERT_BATCH_SIZE = 5;
     private static final int MAX_NUM_THREADS = 10;
 
     /**
@@ -55,10 +55,10 @@ public class TelegramConfig {
     private Integer numThreads;
 
     /**
-     * Batch size for messages
+     * Alerts batch size
      */
     @NotNull
     @Min(1)
-    @Max(MAX_BATCH_SIZE)
-    private Integer batchSize;
+    @Max(MAX_ALERT_BATCH_SIZE)
+    private Integer alertBatchSize;
 }

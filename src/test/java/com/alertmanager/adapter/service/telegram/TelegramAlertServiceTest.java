@@ -40,7 +40,7 @@ class TelegramAlertServiceTest {
     @Test
     void testSendAlert() throws TelegramApiException {
         AlertRequest alertRequest = readAlertRequest();
-        when(telegramConfig.getBatchSize()).thenReturn(BATCH_SIZE);
+        when(telegramConfig.getAlertBatchSize()).thenReturn(BATCH_SIZE);
         when(templateProcessorService.process(anyString(), anyMap())).thenReturn(EXPECTED_MESSAGE);
         telegramAlertService.sendAlert(alertRequest);
         verify(telegramSender, times(4)).sendMessage(EXPECTED_MESSAGE);
