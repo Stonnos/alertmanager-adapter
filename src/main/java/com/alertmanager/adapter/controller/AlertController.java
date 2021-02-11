@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Rest controller to receive requests from alert manager.
  *
@@ -33,7 +35,7 @@ public class AlertController {
      */
     @Operation(summary = "Send alert to telegram")
     @PostMapping(value = "/telegram")
-    public void sendAlertToTelegram(@RequestBody AlertRequest alertRequest) throws Exception {
+    public void sendAlertToTelegram(@Valid @RequestBody AlertRequest alertRequest) throws Exception {
         if (log.isDebugEnabled()) {
             log.debug("Received alert request for sending to telegram: {}", alertRequest);
         }

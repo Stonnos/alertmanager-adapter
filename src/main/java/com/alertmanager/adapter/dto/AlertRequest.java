@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -31,6 +33,8 @@ public class AlertRequest {
      * Alerts list
      */
     @Schema(description = "Alerts list")
+    @Valid
+    @NotEmpty
     private List<Alert> alerts;
 
     /**
