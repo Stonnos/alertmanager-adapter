@@ -13,6 +13,8 @@
 
 == Описание ключевой конфигурации модуля
 
+Настройки проекта находятся в файле application.yml
+
 * telegram.baseUrl - базовый url Telegram API
 * telegram.token - токен доступа к Telegram API
 * telegram.botUserName - имя бота
@@ -32,8 +34,36 @@
 
 [source,yml]
 ----
-
+version: "3.7"
+services:
+  alert-manager:
+    image: alert-manager
+    container_name: alert-manager
+    environment:
+      SERVER_PORT: "8080"
+      TELEGRAM_BASEURL: "https://api.telegram.org/bot"
+      TELEGRAM_TOKEN: "<token>"
+      TELEGRAM_BOTUSERNAME: "<your-bot>"
+      TELEGRAM_CHATID: "<your-chat>"
+    ports:
+      - "8080:8080"
 ----
+
+Ниже приведено описание переменных окружения
+
+|===
+|Переменная окружения|Описание
+|SERVER_PORT
+|Порт для запуска приложения
+|TELEGRAM_BASEURL
+|Базовый url Telegram API
+|TELEGRAM_TOKEN
+|Токен доступа к Telegram API
+|TELEGRAM_BOTUSERNAME
+|Имя бота
+|TELEGRAM_CHATID
+|ID чата
+|===
 
 == Настройка web hook в alert manager
 
