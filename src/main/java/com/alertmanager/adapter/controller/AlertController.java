@@ -2,6 +2,7 @@ package com.alertmanager.adapter.controller;
 
 import com.alertmanager.adapter.dto.AlertRequest;
 import com.alertmanager.adapter.service.AlertService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class AlertController {
 
+    private final ObjectMapper objectMapper;
     private final AlertService alertService;
 
     /**
@@ -37,7 +39,8 @@ public class AlertController {
     @PostMapping(value = "/telegram")
     public void sendAlertToTelegram(@Valid @RequestBody AlertRequest alertRequest) throws Exception {
         if (log.isDebugEnabled()) {
-            log.debug("Received alert request for sending to telegram: {}", alertRequest);
+            log.debug("Received alert request for sending to telegram: {}",
+                    objectMapper.writeValueAsString(alertRequest));
         }
         alertService.sendAlert(alertRequest);
     }
