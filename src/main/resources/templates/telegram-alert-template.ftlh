@@ -1,7 +1,7 @@
 <strong>
-    ${alertRequest.alerts?size} alerts received
+    ${alerts?size} alerts received
 </strong>
-<#list alertRequest.alerts as alert>
+<#list alerts as alert>
     <b>Labels</b>
     alertname = ${alert.labels.alertName}
     instance = ${alert.labels.instance}
