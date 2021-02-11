@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import javax.inject.Inject;
 
 import static com.alertmanager.adapter.TestHelperUtils.readAlertRequest;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,5 +42,6 @@ class AlertControllerTest {
                 .content(objectMapper.writeValueAsString(alertRequest))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+        verify(alertService).sendAlert(alertRequest);
     }
 }

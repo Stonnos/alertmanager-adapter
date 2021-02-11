@@ -40,7 +40,6 @@ public class TelegramConfiguration {
             }
         };
         telegramLongPollingBot.getOptions().setBaseUrl(telegramConfig.getBaseUrl());
-        telegramLongPollingBot.getOptions().setMaxThreads(telegramConfig.getMaxThreads());
         return telegramLongPollingBot;
     }
 }

@@ -1,0 +1,82 @@
+= ALERT MANAGER ADAPTER
+:toc: macro
+
+== Введение
+
+Модуль реализует адаптер для получения уведомлений от alert manager с последующей их отправкой в Telegram канал.
+
+
+== Необходмый софт
+
+* Openjdk 1.11
+* maven >= 3.6
+
+== Описание ключевой конфигурации модуля
+
+Настройки проекта находятся в файле application.yml
+
+* telegram.baseUrl - базовый url Telegram API
+* telegram.token - токен доступа к Telegram API
+* telegram.botUserName - имя бота
+* telegram.chatId - ID чата
+
+== Инструкция по запуску
+
+1. Собрать проект с помощью системы сборки проекта maven. Ниже приведен пример команды:
+
+   mvn clean install
+
+2. Запустить проект с помощью команды:
+
+   java -jar target/alertmanager-adapter.war
+
+== Пример docker-compose файла
+
+[source,yml]
+----
+version: "3.7"
+services:
+  alertmanager-adapter:
+    image: alertmanager-adapter
+    container_name: alertmanager-adapter
+    environment:
+      SERVER_PORT: "8080"
+      TELEGRAM_BASEURL: "https://api.telegram.org/bot"
+      TELEGRAM_TOKEN: "<token>"
+      TELEGRAM_BOTUSERNAME: "<your-bot>"
+      TELEGRAM_CHATID: "<your-chat>"
+    ports:
+      - "8080:8080"
+----
+
+Ниже приведено описание переменных окружения
+
+|===
+|Переменная окружения|Описание
+|SERVER_PORT
+|Порт для запуска приложения
+|TELEGRAM_BASEURL
+|Базовый url Telegram API
+|TELEGRAM_TOKEN
+|Токен доступа к Telegram API
+|TELEGRAM_BOTUSERNAME
+|Имя бота
+|TELEGRAM_CHATID
+|ID чата
+|===
+
+== Настройка web hook в alert manager
+
+[source,yml]
+----
+route:
+  receiver: 'my-app'
+  group_wait: 30s
+  group_interval: 1m
+  repeat_interval: 3h
+
+receivers:
+  - name: 'my-app'
+    webhook_configs:
+      - url: 'http://alertmanager:8080/alerts/telegram'
+----
