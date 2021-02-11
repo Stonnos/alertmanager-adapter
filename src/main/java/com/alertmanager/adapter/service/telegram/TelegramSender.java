@@ -49,7 +49,7 @@ public class TelegramSender {
 
             @Override
             public void onError(BotApiMethod<Message> method, TelegramApiRequestException apiException) {
-                log.error("Telegram api request exception for message [{}]: {}", message, apiException.getMessage());
+                log.error("Telegram api request exception for message [{}]: {}", message, apiException.getApiResponse());
             }
 
             @Override
