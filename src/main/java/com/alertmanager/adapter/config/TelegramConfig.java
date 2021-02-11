@@ -5,7 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * Telegram config.
@@ -40,10 +39,4 @@ public class TelegramConfig {
      */
     @NotBlank
     private String chatId;
-
-    /**
-     * Max. threads for async method execution
-     */
-    @NotNull
-    private Integer maxThreads;
 }
