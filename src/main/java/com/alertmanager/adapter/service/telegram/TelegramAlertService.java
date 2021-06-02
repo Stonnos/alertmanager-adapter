@@ -1,7 +1,6 @@
 package com.alertmanager.adapter.service.telegram;
 
 import com.alertmanager.adapter.config.TelegramConfig;
-import com.alertmanager.adapter.dto.Alert;
 import com.alertmanager.adapter.dto.AlertRequest;
 import com.alertmanager.adapter.service.AlertService;
 import com.alertmanager.adapter.service.template.TemplateProcessorService;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 /**
