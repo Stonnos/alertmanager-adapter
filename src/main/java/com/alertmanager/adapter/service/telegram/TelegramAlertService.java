@@ -34,13 +34,12 @@ public class TelegramAlertService implements AlertService {
 
     @Override
     public void sendAlert(AlertRequest alertRequest) throws TelegramApiException {
-        if (log.isDebugEnabled()) {
-            log.debug("Starting to send alert {} to telegram", alertRequest);
-        }
+        log.info("Starting to send [{}] alerts to telegram", alertRequest.getAlerts().size());
         int alertBatchSize = telegramConfig.getAlertBatchSize();
-        List<List<Alert>> alertPartitions = Lists.partition(alertRequest.getAlerts(), alertBatchSize);
-        log.debug("Got [{}] alerts chunks of size [{}]", alertPartitions.size(), alertBatchSize);
+        var alertPartitions = Lists.partition(alertRequest.getAlerts(), alertBatchSize);
+        log.info("Got [{}] alerts chunks of capacity [{}]", alertPartitions.size(), alertBatchSize);
         for (var alerts : alertPartitions) {
+            log.info("Starting to sent chunk with [{}] alerts to telegram", alerts.size());
             Map<String, Object> templateData = Collections.singletonMap(ALERTS_VARIABLE, alerts);
             String message = templateProcessorService.process(TELEGRAM_ALERT_TEMPLATE, templateData);
             telegramSender.sendMessage(message);

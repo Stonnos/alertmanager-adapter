@@ -28,15 +28,11 @@ public class FreemarkerTemplateProcessorService implements TemplateProcessorServ
 
     @Override
     public String process(String templateCode, Map<String, Object> variables) {
-        if (log.isDebugEnabled()) {
-            log.debug("Starting to process template [{}] with variables: {}", templateCode, variables);
-        }
+        log.debug("Starting to process template [{}] with variables: {}", templateCode, variables);
         try {
             Template template = configuration.getTemplate(templateCode);
             String message = processTemplateIntoString(template, variables);
-            if (log.isDebugEnabled()) {
-                log.debug("Message [{}] for template [{}] has been processed", message, templateCode);
-            }
+            log.debug("Message [{}] for template [{}] has been processed", message, templateCode);
             return message;
         } catch (IOException | TemplateException ex) {
             log.error("There was an error while template [{}] processing: {}", templateCode, ex.getMessage());

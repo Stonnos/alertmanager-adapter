@@ -20,13 +20,13 @@ public class AlertRequest {
     /**
      * Receiver name
      */
-    @Schema(description = "Receiver name")
+    @Schema(description = "Receiver name", example = "eca-admin")
     private String receiver;
 
     /**
      * Alert status
      */
-    @Schema(description = "Alert status")
+    @Schema(description = "Alert status", example = "firing")
     private String status;
 
     /**
@@ -59,13 +59,13 @@ public class AlertRequest {
      * Alert manager external url
      */
     @JsonProperty("externalURL")
-    @Schema(description = "Alert manager external url")
+    @Schema(description = "Alert manager external url", example = "http://alert-manager")
     private String externalUrl;
 
     /**
      * Version tag
      */
-    @Schema(description = "Version tag")
+    @Schema(description = "Version tag", example = "4")
     private String version;
 
     /**

@@ -83,5 +83,5 @@ route:
 receivers:
   - name: 'my-app'
     webhook_configs:
-      - url: 'http://alertmanager:8080/alerts/telegram'
+      - url: 'http://alertmanager-adapter:8080/alerts/telegram'
 ----

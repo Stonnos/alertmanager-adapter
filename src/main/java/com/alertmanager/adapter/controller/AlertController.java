@@ -38,10 +38,7 @@ public class AlertController {
     @Operation(summary = "Send alert to telegram")
     @PostMapping(value = "/telegram")
     public void sendAlertToTelegram(@Valid @RequestBody AlertRequest alertRequest) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("Received alert request for sending to telegram: {}",
-                    objectMapper.writeValueAsString(alertRequest));
-        }
+        log.info("Received alert request for sending to telegram: {}", objectMapper.writeValueAsString(alertRequest));
         alertService.sendAlert(alertRequest);
     }
 }
