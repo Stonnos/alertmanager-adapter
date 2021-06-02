@@ -20,7 +20,7 @@ public class Alert {
     /**
      * Alert status
      */
-    @Schema(description = "Alert status")
+    @Schema(description = "Alert status", example = "firing")
     @NotBlank
     private String status;
 

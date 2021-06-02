@@ -24,7 +24,7 @@
         <assertj.core.version>3.13.1</assertj.core.version>
         <org.apache.commons.lang3.version>3.7</org.apache.commons.lang3.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
-        <springdoc.openui.version>1.5.2</springdoc.openui.version>
+        <springdoc.openapi.version>1.5.2</springdoc.openapi.version>
         <inject.version>1</inject.version>
         <docker-maven-plugin.version>1.4.13</docker-maven-plugin.version>
         <docker.image.name>${project.artifactId}</docker.image.name>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.openui.version}</version>
+            <version>${springdoc.openapi.version}</version>
         </dependency>
 
         <dependency>

@@ -31,9 +31,7 @@ public class TelegramSender {
      * @param message - message string
      */
     public void sendMessage(String message) throws TelegramApiException {
-        if (log.isDebugEnabled()) {
-            log.debug("Starting to send message [{}] to telegram", message);
-        }
+        log.debug("Starting to send message [{}] to telegram", message);
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(telegramConfig.getChatId())
                 .text(message)
@@ -42,14 +40,13 @@ public class TelegramSender {
         telegramLongPollingBot.executeAsync(sendMessage, new SentCallback<>() {
             @Override
             public void onResult(BotApiMethod<Message> method, Message response) {
-               if (log.isDebugEnabled()) {
-                   log.debug("Message [{}] has been sent to telegram with response: {}", message, response);
-               }
+                log.info("Alert message has been sent to telegram with id [{}]", response.getMessageId());
             }
 
             @Override
             public void onError(BotApiMethod<Message> method, TelegramApiRequestException apiException) {
-                log.error("Telegram api request exception for message [{}]: {}", message, apiException.getApiResponse());
+                log.error("Telegram api request exception for message [{}]: {}", message,
+                        apiException.getApiResponse());
             }
 
             @Override
