@@ -1,3 +1,4 @@
+## Telegram integration properties
 telegram:
   baseUrl: https://api.telegram.org/bot
   token: 1652121935:AAFCAfS-QYSOfJqkPd1glmVKV7n4PqI_0fE
@@ -5,3 +6,12 @@ telegram:
   chatId: 1480287278
   numThreads: 3
   alertBatchSize: 5
+
+## Swagger properties
+open-api:
+  basePath: /
+  title: Service for sending alerts from alertmanager to telegram
+  description: Service implements alertmanager adapter for recieving alert requests from alertmanager for sending to telegram
+  author: Roman Batygin
+  email: roman.batygin@mail.ru
+  projectVersion: @project.version@
