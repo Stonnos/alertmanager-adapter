@@ -27,7 +27,6 @@ public class Labels {
      * Instance name
      */
     @Schema(description = "Instance name", example = "app-service:8080")
-    @NotBlank
     private String instance;
 
     /**
