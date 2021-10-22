@@ -36,8 +36,6 @@ public class Alert {
      * Annotations
      */
     @Schema(description = "Annotations")
-    @Valid
-    @NotNull
     private Annotations annotations;
 
     /**

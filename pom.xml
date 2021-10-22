@@ -36,6 +36,7 @@
             **/config/*,
             **/exception/*,
             **/dto/*,
+            **/doc/*,
             **/AlertManagerAdapterApplication.java
         </sonar.coverage.exclusions>
     </properties>
@@ -188,6 +189,7 @@
                         <exclude>**/dto/**/*</exclude>
                         <exclude>**/exception/**/*</exclude>
                         <exclude>**/util/**/*</exclude>
+                        <exclude>**/doc/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
