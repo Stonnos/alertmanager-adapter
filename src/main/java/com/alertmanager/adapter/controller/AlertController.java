@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+import static com.alertmanager.adapter.controller.doc.ApiExamples.VALIDATION_ERROR_RESPONSE_JSON;
+
 /**
  * Rest controller to receive requests from alert manager.
  *
@@ -50,7 +52,7 @@ public class AlertController {
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     examples = {
-                                            @ExampleObject(value = ""),
+                                            @ExampleObject(value = VALIDATION_ERROR_RESPONSE_JSON),
                                     },
                                     array = @ArraySchema(schema = @Schema(implementation = ValidationErrorDto.class))
                             )
