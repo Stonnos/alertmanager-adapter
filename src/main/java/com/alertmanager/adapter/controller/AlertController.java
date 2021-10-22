@@ -1,12 +1,19 @@
 package com.alertmanager.adapter.controller;
 
 import com.alertmanager.adapter.dto.AlertRequest;
+import com.alertmanager.adapter.dto.ValidationErrorDto;
 import com.alertmanager.adapter.service.AlertService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +42,20 @@ public class AlertController {
      * @param alertRequest - alert request
      * @throws Exception in case of error
      */
-    @Operation(summary = "Send alert to telegram")
+    @Operation(summary = "Send alert to telegram",
+            description = "Send alert to telegram",
+            responses = {
+                    @ApiResponse(description = "OK", responseCode = "200"),
+                    @ApiResponse(description = "Bad request", responseCode = "400",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    examples = {
+                                            @ExampleObject(value = ""),
+                                    },
+                                    array = @ArraySchema(schema = @Schema(implementation = ValidationErrorDto.class))
+                            )
+                    )
+            })
     @PostMapping(value = "/telegram")
     public void sendAlertToTelegram(@Valid @RequestBody AlertRequest alertRequest) throws Exception {
         log.info("Received alert request for sending to telegram: {}", objectMapper.writeValueAsString(alertRequest));
