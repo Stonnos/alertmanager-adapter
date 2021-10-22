@@ -1,0 +1,851 @@
+= Service for sending alerts from alertmanager to telegram
+Автор: Roman Batygin
+(roman.batygin@mail.ru)
+:toc:
+:toc-title: Table of contents
+
+== Overview
+
+Service implements alertmanager adapter for recieving alert requests from alertmanager for sending to telegram
+
+
+== Send alert to telegram
+
+__POST__ */alerts/telegram* - Send alert to telegram
+
+
+*Request body*
+
+[width=100%]
+|===
+|*Content type*|*Required*|*Schema*|*Example*
+|*application/json*
+|true
+|
+<<AlertRequest>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a|
+[source,json]
+----
+{
+  "receiver" : "eca-admin",
+  "status" : "firing",
+  "alerts" : [ {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-data-storage:8080",
+      "job" : "eca-data-storage",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "eca-data-storage:8080 has been down for more than 2 minutes.",
+      "summary" : "Service eca-data-storage:8080 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "abd2e740537ebf69"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-mail:8080",
+      "job" : "eca-mail",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "eca-mail:8080 has been down for more than 2 minutes.",
+      "summary" : "Service eca-mail:8080 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "0f86e0e444440bf5"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-oauth:8080",
+      "job" : "eca-oauth",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "eca-oauth:8080 has been down for more than 2 minutes.",
+      "summary" : "Service eca-oauth:8080 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "942754e73fae04cd"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-server-instance-1:8080",
+      "job" : "eca-server",
+      "severity" : "critical",
+      "alertname" : "ProcessCpuUsageTooMuch"
+    },
+    "annotations" : {
+      "description" : "eca-server-instance-1:8080 has been in status [cpu usage > 80%] for more than 1 minute. CPU current usage (93%)",
+      "summary" : "JVM Instance eca-server-instance-1:8080 cpu usage > 80%"
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=process_cpu_usage+%2A+100+%3E+10&g0.tab=1",
+    "fingerprint" : "3cdf6089eee2d366"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-server-instance-1:8080",
+      "job" : "eca-server",
+      "severity" : "warning",
+      "alertname" : "ProcessCpuUsageTooMuch"
+    },
+    "annotations" : {
+      "description" : "eca-server-instance-1:8080 has been in status [cpu usage > 70%] for more than 1 minute. CPU current usage (93%)",
+      "summary" : "JVM Instance eca-server-instance-1:8080 cpu usage > 70%"
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=process_cpu_usage+%2A+100+%3E+10&g0.tab=1",
+    "fingerprint" : "8eddeb487112193d"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-server-instance-2:8080",
+      "job" : "eca-server",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "eca-server-instance-2:8080 has been down for more than 2 minutes.",
+      "summary" : "Service eca-server-instance-2:8080 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "86fc0570ead19f1c"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-web:8080",
+      "job" : "eca-web",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "eca-web:8080 has been down for more than 2 minutes.",
+      "summary" : "Service eca-web:8080 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "258a691d693665a3"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "evaluation-results-service:9443",
+      "job" : "evaluation-results-service",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "evaluation-results-service:9443 has been down for more than 2 minutes.",
+      "summary" : "Service evaluation-results-service:9443 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "65d66c7f6dae7bd5"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "postgres-exporter:9187",
+      "job" : "postgres-exporter",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "postgres-exporter:9187 has been down for more than 2 minutes.",
+      "summary" : "Service postgres-exporter:9187 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "97e5614ccd9dca90"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "zuul-gate:8030",
+      "job" : "zuul-gate",
+      "severity" : "critical",
+      "alertname" : "ServiceDown"
+    },
+    "annotations" : {
+      "description" : "zuul-gate:8030 has been down for more than 2 minutes.",
+      "summary" : "Service zuul-gate:8030 is unavailable."
+    },
+    "startsAt" : "2021-02-11T17:48:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=up+%3D%3D+0&g0.tab=1",
+    "fingerprint" : "b923b5db948e93ce"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "discovery-server:8761",
+      "severity" : "critical",
+      "alertname" : "HeapUsageTooMuch"
+    },
+    "annotations" : {
+      "description" : "discovery-server:8761 has been in status [heap usage > 80%] for more than 1 minute. Current usage (24.56%)",
+      "summary" : "JVM Instance discovery-server:8761 memory usage > 80%"
+    },
+    "startsAt" : "2021-02-11T17:47:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=sum+by%28instance%29+%28jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%29+%2F+sum+by%28instance%29+%28jvm_memory_max_bytes%7Barea%3D%22heap%22%7D%29+%2A+100+%3E+10&g0.tab=1",
+    "fingerprint" : "a6d1fbc9353bab47"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "discovery-server:8761",
+      "severity" : "warning",
+      "alertname" : "HeapUsageTooMuch"
+    },
+    "annotations" : {
+      "description" : "discovery-server:8761 has been in status [heap usage > 70%] for more than 1 minute. Current usage (24.56%)",
+      "summary" : "JVM Instance discovery-server:8761 memory usage > 70%"
+    },
+    "startsAt" : "2021-02-11T17:47:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=sum+by%28instance%29+%28jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%29+%2F+sum+by%28instance%29+%28jvm_memory_max_bytes%7Barea%3D%22heap%22%7D%29+%2A+100+%3E+10&g0.tab=1",
+    "fingerprint" : "ff6471d564dcda3e"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-server-instance-1:8080",
+      "severity" : "critical",
+      "alertname" : "HeapUsageTooMuch"
+    },
+    "annotations" : {
+      "description" : "eca-server-instance-1:8080 has been in status [heap usage > 80%] for more than 1 minute. Current usage (11.9%)",
+      "summary" : "JVM Instance eca-server-instance-1:8080 memory usage > 80%"
+    },
+    "startsAt" : "2021-02-11T17:49:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=sum+by%28instance%29+%28jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%29+%2F+sum+by%28instance%29+%28jvm_memory_max_bytes%7Barea%3D%22heap%22%7D%29+%2A+100+%3E+10&g0.tab=1",
+    "fingerprint" : "597e26c992e510fc"
+  }, {
+    "status" : "firing",
+    "labels" : {
+      "instance" : "eca-server-instance-1:8080",
+      "severity" : "warning",
+      "alertname" : "HeapUsageTooMuch"
+    },
+    "annotations" : {
+      "description" : "eca-server-instance-1:8080 has been in status [heap usage > 70%] for more than 1 minute. Current usage (11.9%)",
+      "summary" : "JVM Instance eca-server-instance-1:8080 memory usage > 70%"
+    },
+    "startsAt" : "2021-02-11T17:49:29.345644896+07:00",
+    "endsAt" : "0001-01-01T00:00:00Z",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=sum+by%28instance%29+%28jvm_memory_used_bytes%7Barea%3D%22heap%22%7D%29+%2F+sum+by%28instance%29+%28jvm_memory_max_bytes%7Barea%3D%22heap%22%7D%29+%2A+100+%3E+10&g0.tab=1",
+    "fingerprint" : "43337aef3a5fd6d7"
+  }, {
+    "status" : "resolved",
+    "labels" : {
+      "instance" : "rabbitmq:15692",
+      "severity" : "warning",
+      "alertname" : "RabbitMQUnackedMessagesTooMuch"
+    },
+    "annotations" : {
+      "description" : "rabbitmq:15692 has been in status [unacked messages > 100] for more than 1 minute. Current unacked messages (20)",
+      "summary" : "Rabbit MQ instance rabbitmq:15692 unacked messages > 100"
+    },
+    "startsAt" : "2021-02-11T17:48:59.345644896+07:00",
+    "endsAt" : "2021-02-11T17:49:29.345644896+07:00",
+    "generatorURL" : "http://eca-service:9090/graph?g0.expr=sum+by%28instance%2C+rabbitmq_cluster%29+%28rabbitmq_queue_messages_unacked%29+%3E+1&g0.tab=1",
+    "fingerprint" : "9c278467438c5f73"
+  } ],
+  "groupLabels" : { },
+  "commonLabels" : { },
+  "commonAnnotations" : { },
+  "version" : "4",
+  "groupKey" : "{}:{}",
+  "externalURL" : "http://eca-service:9093"
+}
+----
+|===
+
+
+
+*Api responses*
+[width=100%]
+|===
+|*Code*|*Description*|*Content type*|*Schema*|*Example*
+|200
+|OK
+|*-*
+|-
+a|
+-
+|400
+|Bad request
+|*application/json*
+|
+__array__
+<<<ValidationErrorDto>>
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a|
+[source,json]
+----
+[ {
+  "fieldName" : "alerts[0].labels.alertName",
+  "code" : "NotBlank",
+  "errorMessage" : "must not be blank"
+} ]
+----
+|===
+
+
+== Components
+=== ValidationErrorDto
+:table-caption: Table
+.Validation error model
+[width=100%]
+|===
+|*Name*|*Description*|*Schema*
+|*fieldName*
+|Field name
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*code*
+|Error code
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*errorMessage*
+|Error message
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|===
+=== Alert
+:table-caption: Table
+.Alert model
+[width=100%]
+|===
+|*Name*|*Description*|*Schema*
+|*status**
+|Alert status
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*labels**
+|-
+a|
+<<Labels>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*annotations*
+|-
+a|
+<<Annotations>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*startsAt*
+|Alert starts at
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*endsAt*
+|Alert ends at
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*generatorURL*
+|Alert url in alert manager
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*fingerprint*
+|Alert fingerprint
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|===
+=== AlertRequest
+:table-caption: Table
+.Alert request model
+[width=100%]
+|===
+|*Name*|*Description*|*Schema*
+|*receiver*
+|Receiver name
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*status*
+|Alert status
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*alerts**
+|Alerts list
+a|
+__array__
+<<<Alert>>
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*groupLabels*
+|-
+a|
+<<Labels>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*commonLabels*
+|-
+a|
+<<Labels>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*commonAnnotations*
+|-
+a|
+<<Annotations>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*version*
+|Version tag
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*groupKey*
+|Group key
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*externalURL*
+|Alert manager external url
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|===
+=== Annotations
+:table-caption: Table
+.Alert annotation model
+[width=100%]
+|===
+|*Name*|*Description*|*Schema*
+|*description*
+|Description
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*summary*
+|Summary
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|===
+=== Labels
+:table-caption: Table
+.Alert label model
+[width=100%]
+|===
+|*Name*|*Description*|*Schema*
+|*instance*
+|Instance name
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*job*
+|Job name
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*severity*
+|Alert severity
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|*alertname**
+|Alert name
+a|
+__string__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|===
