@@ -8,8 +8,8 @@
 
 == Необходмый софт
 
-* Openjdk 1.11
-* maven >= 3.6
+* Openjdk 17
+* maven >= 3.9.2
 
 == Описание ключевой конфигурации модуля
 
@@ -30,7 +30,7 @@
 
 2. Запустить проект с помощью команды:
 
-   java -jar target/alertmanager-adapter.war
+   java -jar target/alertmanager-adapter.jar
 
 == Пример docker-compose файла
 
