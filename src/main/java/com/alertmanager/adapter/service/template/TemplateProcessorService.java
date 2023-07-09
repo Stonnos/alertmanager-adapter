@@ -1,8 +1,9 @@
 package com.alertmanager.adapter.service.template;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
+
 import java.util.Map;
 
 /**
