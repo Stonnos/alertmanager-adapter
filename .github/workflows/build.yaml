@@ -38,5 +38,5 @@ jobs:
 
       - name: Push image to Dockerhub
         run: |
-          docker tag ${{ env.IMAGE_NAME }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPOSITORY }}:${{ env.IMAGE_NAME }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPOSITORY }}:${{ env.IMAGE_NAME }}
+          docker tag ${{ vars.IMAGE_NAME }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.DOCKER_REPOSITORY }}:${{ vars.IMAGE_NAME }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.DOCKER_REPOSITORY }}:${{ vars.IMAGE_NAME }}
